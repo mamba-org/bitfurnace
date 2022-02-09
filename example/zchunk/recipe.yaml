@@ -1,0 +1,49 @@
+context:
+  name: zchunk
+  version: "1.1.16"
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: https://github.com/zchunk/zchunk/archive/{{ version }}.tar.gz
+  sha256: 33934adecddc50c64615dd8cdfe52a79df674a5bb1d5e83a9c09e1d1e6e9b92c
+
+build:
+  number: 0
+  skip: [win]
+  run_exports:
+    - "{{ pin_subpackage(name, max_pin='x.x' ) }}"
+
+requirements:
+  build:
+    - "{{ compiler('c') }}"
+    - meson
+    - pkg-config
+    - ninja
+  host:
+    - libcurl
+    - zstd 1.5.0
+    - openssl
+    - sel(osx): argp-standalone
+
+test:
+  commands:
+    - test -f ${PREFIX}/lib/libzck${SHLIB_EXT}
+    - test -f ${PREFIX}/bin/zck
+    - test -f ${PREFIX}/include/zck.h
+    - test -f ${PREFIX}/lib/pkgconfig/zck.pc
+
+about:
+  home: https://github.com/zchunk/zchunk
+  license: BSD-2-Clause
+  license_family: BSD
+  license_file: LICENSE
+  summary: A file format designed for highly efficient deltas while maintaining good compression
+  description: |
+    zchunk is a compressed file format that splits the file into independent
+    chunks. This allows you to only download changed chunks when downloading a
+    new version of the file, and also makes zchunk files efficient over rsync.
+    zchunk files are protected with strong checksums to verify that the file
+    you downloaded is, in fact, the file you wanted.
