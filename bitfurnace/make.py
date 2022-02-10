@@ -10,4 +10,4 @@ class Make(RecipeBase):
 
     default_build_args = [f"PREFIX={variables.prefix}", f"-j{variables.cpu_count}"]
 
-    default_install_args = ["install"]
+    default_install_args = ["install", f"PREFIX={variables.prefix}"]
