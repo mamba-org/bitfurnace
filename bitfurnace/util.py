@@ -19,13 +19,18 @@ variables = dotdict(
     {
         "prefix": Path(os.environ.get("PREFIX")),
         "build_prefix": Path(os.environ.get("BUILD_PREFIX")),
+        "recipe_dir": Path(os.environ.get("RECIPE_DIR")),
         "target_platform": os.environ.get("target_platform"),
         "build_platform": os.environ.get("build_platform"),
         "src_dir": Path(os.environ.get("SRC_DIR")),
-        "recipe_dir": Path(os.environ.get("RECIPE_DIR")),
         "cpu_count": os.environ.get("CPU_COUNT"),
         "host": os.environ.get("HOST"),
         "build": os.environ.get("BUILD"),
+        "pkg_version": os.environ.get("PKG_VERSION"),
+        "cc": os.environ.get("CC"),
+        "cxx": os.environ.get("CXX"),
+        "cpp": os.environ.get("CPP"),
+        "fortran": os.environ.get("FORTRAN"),
     }
 )
 

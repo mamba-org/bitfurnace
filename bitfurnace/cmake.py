@@ -14,6 +14,7 @@ class CMake(RecipeBase):
         f"-DCMAKE_INSTALL_PREFIX={variables.prefix}",
         f"-DCMAKE_PREFIX_PATH={variables.prefix}",
         "-DCMAKE_INSTALL_LIBDIR=lib",
+        "-DBUILD_TYPE=Release",
         "-GNinja",
     ]
 
