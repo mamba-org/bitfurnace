@@ -33,12 +33,12 @@ if variables.target_platform.startswith('win'):
     variables["library_lib"] = Path(os.environ.get("LIBRARY_LIB"))
     variables["library_bin"] = Path(os.environ.get("LIBRARY_BIN"))
 
+features = dotdict()
 for k in os.environ.keys():
-    features = dotdict()
     if k.startswith('FEATURE_'):
         feature_name = k[len('FEATURE_'):].lower()
         features[feature_name] = os.environ[k] == '1'
-    variables['features'] = features
+variables["features"] = features
 
 def initialize_globals(g=None):
     if not g:

@@ -7,11 +7,15 @@ class RecipeBase:
 
     cflags = os.environ.get('CFLAGS', "").split()
     cxxflags = os.environ.get('CXXFLAGS', "").split()
+    ldflags = os.environ.get('LDFLAGS', "").split()
+
+    env = os.environ.copy()
 
     def get_env(self):
-        env = os.environ.copy()
+        env = self.env.copy()
         env['CFLAGS'] = ' '.join(self.cflags)
         env['CXXFLAGS'] = ' '.join(self.cxxflags)
+        env['LDFLAGS'] = ' '.join(self.ldflags)
         return env
 
     def run(self, args):

@@ -11,7 +11,7 @@ class Autotools(RecipeBase):
     workdir = variables.src_dir
     configure_cmd = workdir / "configure"
 
-    configure_args = [
+    default_configure_args = [
         f"--prefix={variables.prefix}",
         f"--host={variables.host}",
         f"--build={variables.build}",
