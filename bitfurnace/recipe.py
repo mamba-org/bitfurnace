@@ -1,8 +1,21 @@
+import os
 from bitfurnace.util import run, variables
 
 
 class RecipeBase:
     workdir = variables.src_dir
+
+    cflags = os.environ.get('CFLAGS', "").split()
+    cxxflags = os.environ.get('CXXFLAGS', "").split()
+
+    def get_env(self):
+        env = os.environ.copy()
+        env['CFLAGS'] = ' '.join(self.cflags)
+        env['CXXFLAGS'] = ' '.join(self.cxxflags)
+        return env
+
+    def run(self, args):
+        run(args, cwd=self.workdir, env=self.get_env(), shell=False)
 
     def __init__(self):
         pass
@@ -19,8 +32,7 @@ class RecipeBase:
             + self.get_default_configure_args()
             + self.get_configure_args()
         ]
-
-        run(args, cwd=self.workdir, shell=False)
+        self.run(args)
 
     def build(self):
         args = [
@@ -29,9 +41,7 @@ class RecipeBase:
             + self.get_default_build_args()
             + self.get_build_args()
         ]
-        run(
-            args, cwd=self.workdir,
-        )
+        self.run(args)
 
     def install(self):
         args = [
@@ -40,20 +50,19 @@ class RecipeBase:
             + self.get_default_install_args()
             + self.get_install_args()
         ]
-        run(
-            args, cwd=self.workdir,
-        )
+        self.run(args)
 
     def test(self):
+        if not hasattr(self, 'test_cmd'):
+            return
+
         args = [
             str(x)
             for x in [self.test_cmd]
             + self.get_default_test_args()
             + self.get_test_args()
         ]
-        run(
-            args, cwd=self.workdir,
-        )
+        self.run(args)
 
     def post_install(self):
         pass

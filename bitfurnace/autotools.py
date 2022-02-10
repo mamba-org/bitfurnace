@@ -1,6 +1,9 @@
 from bitfurnace.util import variables, run
 from bitfurnace.recipe import RecipeBase
 
+import logging
+log = logging.getLogger(__file__)
+
 import shutil
 
 
@@ -38,9 +41,13 @@ class Autotools(RecipeBase):
                     shutil.copy(f, config_guess_loc)
 
         if self.run_autoreconf:
-            run(
-                [variables.build_prefix / "bin" / "autoreconf", "-v", "-f", "-i"],
-                cwd=self.workdir,
-            )
+            autoreconf_path = variables.build_prefix / "bin" / "autoreconf"
+            if not autoreconf_path.exists():
+                log.warning("Autoreconf not installed in build prefix. Add `autoconf` package to build.")
+            else:
+                run(
+                    [variables.build_prefix / "bin" / "autoreconf", "-v", "-f", "-i"],
+                    cwd=self.workdir,
+                )
 
         super().pre_configure()
