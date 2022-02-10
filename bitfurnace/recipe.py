@@ -30,6 +30,8 @@ class RecipeBase:
             self.workdir.mkdir(parents=True, exist_ok=False)
 
     def configure(self):
+        if not hasattr(self, 'configure_cmd'):
+            return
         args = [
             str(x)
             for x in [self.configure_cmd]
