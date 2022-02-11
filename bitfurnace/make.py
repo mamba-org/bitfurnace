@@ -1,6 +1,7 @@
 from bitfurnace.recipe import RecipeBase
 from bitfurnace.util import variables
 
+
 class Make(RecipeBase):
     def configure(self):
         return 0

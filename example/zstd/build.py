@@ -6,8 +6,8 @@ class Recipe(CMake):
     default_test_args = ["test"]
 
     cmake_configure_args = {
-        'ZSTD_LEGACY_SUPPORT': True,
-        'ZSTD_BUILD_PROGRAMS': False,
-        'ZSTD_BUILD_CONTRIB': False,
-        'ZSTD_PROGRAMS_LINK_SHARED': True   
+        "ZSTD_LEGACY_SUPPORT": True,
+        "ZSTD_BUILD_PROGRAMS": False,
+        "ZSTD_BUILD_CONTRIB": False,
+        "ZSTD_PROGRAMS_LINK_SHARED": True,
     }

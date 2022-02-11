@@ -1,10 +1,10 @@
+import logging
+import shutil
+
 from bitfurnace.util import variables, run
 from bitfurnace.recipe import RecipeBase
 
-import logging
 log = logging.getLogger(__file__)
-
-import shutil
 
 
 class Autotools(RecipeBase):
@@ -43,7 +43,9 @@ class Autotools(RecipeBase):
         if self.run_autoreconf:
             autoreconf_path = variables.build_prefix / "bin" / "autoreconf"
             if not autoreconf_path.exists():
-                log.warning("Autoreconf not installed in build prefix. Add `autoconf` package to build.")
+                log.warning(
+                    "Autoreconf not installed in build prefix. Add `autoconf` package to build."
+                )
             else:
                 run(
                     [variables.build_prefix / "bin" / "autoreconf", "-v", "-f", "-i"],

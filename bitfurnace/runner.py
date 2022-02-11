@@ -2,7 +2,6 @@ import sys
 
 import importlib.util
 from bitfurnace.util import variables
-from pathlib import Path
 
 header = """
 #import sys
@@ -11,6 +10,7 @@ from bitfurnace.util import initialize_globals, run
 
 initialize_globals(globals())
 """
+
 
 def run_recipe(r):
     r.pre_configure()
@@ -22,7 +22,6 @@ def run_recipe(r):
 
     r.install()
     r.post_install()
-
 
 
 if __name__ == "__main__":

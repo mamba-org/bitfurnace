@@ -5,17 +5,17 @@ from bitfurnace.util import run, variables
 class RecipeBase:
     workdir = variables.src_dir
 
-    cflags = os.environ.get('CFLAGS', "").split()
-    cxxflags = os.environ.get('CXXFLAGS', "").split()
-    ldflags = os.environ.get('LDFLAGS', "").split()
+    cflags = os.environ.get("CFLAGS", "").split()
+    cxxflags = os.environ.get("CXXFLAGS", "").split()
+    ldflags = os.environ.get("LDFLAGS", "").split()
 
     env = os.environ.copy()
 
     def get_env(self):
         env = self.env.copy()
-        env['CFLAGS'] = ' '.join(self.cflags)
-        env['CXXFLAGS'] = ' '.join(self.cxxflags)
-        env['LDFLAGS'] = ' '.join(self.ldflags)
+        env["CFLAGS"] = " ".join(self.cflags)
+        env["CXXFLAGS"] = " ".join(self.cxxflags)
+        env["LDFLAGS"] = " ".join(self.ldflags)
         return env
 
     def run(self, args):
@@ -30,7 +30,7 @@ class RecipeBase:
             self.workdir.mkdir(parents=True, exist_ok=False)
 
     def configure(self):
-        if not hasattr(self, 'configure_cmd'):
+        if not hasattr(self, "configure_cmd"):
             return
         args = [
             str(x)
@@ -59,7 +59,7 @@ class RecipeBase:
         self.run(args)
 
     def test(self):
-        if not hasattr(self, 'test_cmd'):
+        if not hasattr(self, "test_cmd"):
             return
 
         args = [
