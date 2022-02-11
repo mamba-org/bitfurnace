@@ -1,6 +1,5 @@
 import sys
 
-# import tempfile
 import importlib.util
 from bitfurnace.util import variables
 from pathlib import Path
