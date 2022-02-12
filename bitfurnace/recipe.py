@@ -37,6 +37,9 @@ class RecipeBase:
         if not cmd:
             return False
 
+        if isinstance(cmd, str):
+            cmd = [cmd]
+
         if hasattr(self, f"get_default_{stage_name}_args"):
             default_args = getattr(self, f"get_default_{stage_name}_args")()
         else:
@@ -47,14 +50,14 @@ class RecipeBase:
         else:
             args = getattr(self, f"{stage_name}_args", [])
 
-        cmd = [str(c) for c in cmd + default_args + args]
+        cmd = [str(c) for c in (cmd + default_args + args)]
 
         self.run_cmd(cmd)
 
     def run_all_stages(self):
         # execute all stages
         for stage in self.stages:
-            getattr(r, stage)()
+            getattr(self, stage)()
 
     def __init__(self):
         pass
