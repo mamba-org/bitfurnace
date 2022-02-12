@@ -13,15 +13,7 @@ initialize_globals(globals())
 
 
 def run_recipe(r):
-    r.pre_configure()
-    r.configure()
-    r.build()
-
-    if variables.target_platform == variables.build_platform:
-        r.test()
-
-    r.install()
-    r.post_install()
+    r.run_all_stages()
 
 
 if __name__ == "__main__":
