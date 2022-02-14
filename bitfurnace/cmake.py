@@ -4,9 +4,9 @@ from bitfurnace.util import variables, run
 
 class CMake(RecipeBase):
     if variables.target_platform.startswith('emscripten'):
-        configure_cmd = "cmake"
-    else:
         configure_cmd = "emcmake cmake"
+    else:
+        configure_cmd = "cmake"
 
     build_cmd = "ninja"
     cmakelists_dir = variables.src_dir
