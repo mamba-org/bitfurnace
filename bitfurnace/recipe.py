@@ -62,7 +62,7 @@ class RecipeBase:
     def __init__(self):
         pass
 
-    stages = ["pre_configure", "configure", "build", "test", "post_install"]
+    stages = ["pre_configure", "configure", "build", "test", "install", "post_install"]
 
     def pre_configure(self):
         if not self.workdir.exists():
