@@ -37,8 +37,8 @@ class RecipeBase:
         if not cmd:
             return False
 
-        if isinstance(cmd, str):
-            cmd = [cmd]
+        if isinstance(cmd, str) or isinstance(cmd, path.PurePath):
+            cmd = [str(cmd)]
 
         if hasattr(self, f"get_default_{stage_name}_args"):
             default_args = getattr(self, f"get_default_{stage_name}_args")()
