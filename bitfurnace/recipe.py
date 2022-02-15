@@ -1,6 +1,7 @@
 import os
-from bitfurnace.util import run, variables
+import pathlib
 
+from bitfurnace.util import run, variables
 
 class RecipeBase:
     workdir = variables.src_dir
@@ -37,7 +38,7 @@ class RecipeBase:
         if not cmd:
             return False
 
-        if isinstance(cmd, str) or isinstance(cmd, path.PurePath):
+        if isinstance(cmd, str) or isinstance(cmd, pathlib.PurePath):
             cmd = [str(cmd)]
 
         if hasattr(self, f"get_default_{stage_name}_args"):
